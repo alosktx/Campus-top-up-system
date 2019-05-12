@@ -1,0 +1,52 @@
+位置:momosite/weixin/views.py
+
+
+# 处理问题反馈信息
+def showQuestion(request):
+    # 存放错误集合
+    errors = []
+    # 参数字典
+    context = csrf(request)
+    # 初始化一个字典
+    Dict = dict()
+
+    
+    # 如果收到的是POST请求
+    if request.method == 'POST':
+        # 获取联系人姓名
+        name = request.POST.get('name', None)
+        # 获取联系方式
+        phone = request.POST.get('phone', None)
+        # 获取反馈的问题
+        question =request.POST.get('message', None)
+
+        # 存入查询网页的地址,这个用于error网页里，按钮点击返回查询网页
+        Dict['window'] = '/question/'
+        
+        # 联系方式或问题内容为空时，不允许
+        if not question or not phone:
+            if not question :
+                errors.append('\t\t\t请输入您的联系方式\n')
+            if not phone:
+                errors.append('\t\t\t请输入您要反馈的问题\n')
+            Dict['errors'] = errors
+            context.update(Dict)
+            return render(request, 'error.html', context)
+        try:
+            # 把获取的数据存入数据库中Questions表中
+            Questions.objects.create(联系人=name, 联系方式=phone, 问题=question)
+            
+        except ObjectDoesNotExist:
+            errors.append("\t\t\t输入信息错误\n\t\t\t请重新输入!!")
+            Dict['errors'] = errors
+            context.update(Dict)
+            return render(request, 'error.html', context)
+        except:
+            return render(request, 'wenti.html')
+            
+        errors.append("\t\t\t问题已经传达\n\t\t我们会尽快处理好您的问题\n\t\t\t请保持联系")
+        Dict['errors'] = errors
+        
+    context.update(Dict)
+    # 调用查询结果表，并把查询到的值以字典的形式传参给反馈成功网页网页
+    return render(request, 'success.html', context)

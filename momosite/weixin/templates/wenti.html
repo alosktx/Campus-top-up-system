@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>用户反馈界面</title>
+    
+   <style type="text/css">
+   .Content-Main{   
+           max-width: 3000px;
+            margin: auto;
+            margin-top: 0px;
+            padding: 1200px 300px 200px 160px;
+            font: 30px "华文新魏", sans-serif;
+           
+            background:#FFFFFF;
+        }
+        .Content-Main h1{
+            display: block;
+
+            padding: 0px 0px 0px 180px;
+            margin: -1100px 0px 0px 200px;
+            font: 120px "华文新魏", sans-serif;
+            color: #000000;
+            width:1000px;
+
+        }
+       
+        .Content-Main label{
+            display: block;
+            font: 70px "华文新魏", sans-serif;
+            margin: 5px 0px 5px;
+        }
+        .Content-Main label>span{
+          
+            width: 40%;
+            padding-right: 20px;
+            margin-top: 50px;
+            font: 70px "华文新魏", sans-serif;
+            font-weight: bold;
+            text-align: right;
+            color: #000000;
+            
+        }
+        .Content-Main input[type="text"],.Content-Main textarea{
+           font: 70px "华文新魏", sans-serif;
+            width: 1200px;
+            height: 120px;
+            padding: 15px 5px 10px 10px;
+            margin-bottom: 170px;
+            margin-right: 12px;
+            margin-top: 6px;
+            line-height: 80px;
+            border-radius: 5px;
+            border: 3px solid #333399;
+            color: #000000;
+            background-color:#CCCCFF;
+        }
+     
+        .Content-Main textarea{
+            width: 1200px;
+            height: 700px;
+            margin-right: 30px;
+     
+            background-color:#CCCCFF;
+            padding: 10px 0px 0px 5px;
+        }
+        .button{                                              /*提交按钮*/
+            padding: 20px 25px 20px 25px;
+            width:900px;
+            margin-left: 145px;
+            border-radius: 5px;
+             font: 70px "华文新魏", sans-serif;
+            border:3px solid #6666CC;
+            background: #CCCCFF;
+            color:#000000;
+        
+        }
+        .button:hover{                  /*光标选中提交按钮后效果*/
+            color: #333;
+            background-color: #6699CC;
+            border-color: #333399;
+        }
+   </style>
+     
+</head>
+<body>
+       <div class="Content-Main">
+
+
+                <div class="titlee">
+                       <h1>反馈问题</h1>
+                </div>
+
+               <hr style="height:2px;width:1250px;border:none;border-top:3px dashed #6666CC;" />
+
+    <form action="{% url 'ShowQuestion' %}" method="post" class="form-report">     <!-- 需要用户填字的部分 -->
+		<br/>{% csrf_token %}<br/>
+      <label>                                                                                <!-- 联系人部分结构 -->
+            <span>联系人姓名</span>                                       <!--单行输入框-->
+            <input type="text" name="name">                                                      <!-- 联系人填字 -->
+
+        </label>
+
+
+        <label>                                                                               <!-- 联系方式部分结构 -->
+            <span>联系方式</span>
+            <input type="text" name="phone">                                                       <!-- 联系方式填字 -->
+        </label>
+
+                                                                                                         
+        <label>                                                                                <!-- 问题部分结构 -->
+            <span>问题</span>                                                     <!-- 问题部分填字 -->
+            <textarea id="message" name="message" ></textarea>      <!--多行输入框-->
+        </label>
+       
+        <label>
+            <input type="submit" class="button" value="提交">   <!-- 提交按钮 -->
+        </label>
+
+
+    </form>
+</div>
+</body>
+</html>
+

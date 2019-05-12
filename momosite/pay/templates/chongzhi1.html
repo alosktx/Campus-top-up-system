@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>充值学生卡/水卡界面</title>
+    
+   <style type="text/css">
+   .Content-Main{   
+           max-width: 3000px;
+            margin: auto;
+            margin-top: 0px;
+            padding: 1200px 300px 200px 160px;
+            font: 30px "华文新魏", sans-serif;
+           
+            background:#FFFFFF;
+        }
+        .Content-Main h1{
+            display: block;
+
+            padding: 0px 0px 0px 180px;
+            margin: -1100px 0px 0px 0px;
+            font: 120px "华文新魏", sans-serif;
+            color: #000000;
+            width:1000px;
+
+        }
+       
+        .Content-Main label{
+            display: block;
+            font: 70px "华文新魏", sans-serif;
+            margin: 5px 0px 5px;
+            width:250px;
+        }
+        .Content-Main span{
+          
+            width: 40%;
+            padding-right: 20px;
+            margin-top: 50px;
+            font: 70px "华文新魏", sans-serif;
+            font-weight: bold;
+            text-align: right;
+            color: #000000;
+            white-space:nowrap;
+            
+        }
+        .Content-Main input[type="text"],.Content-Main textarea{
+           font: 70px "华文新魏", sans-serif;
+            width: 1200px;
+            height: 120px;
+            padding: 15px 5px 10px 10px;
+            margin-bottom: 170px;
+            margin-right: 12px;
+            margin-top: 6px;
+            line-height: 80px;
+            border-radius: 5px;
+            border: 3px solid #333399;
+            color: #000000;
+            background-color:#CCCCFF;
+        }
+     
+        .button{                                              /*提交按钮*/
+            padding: 20px 25px 20px 25px;
+            width:900px;
+            margin-left: 145px;
+            border-radius: 5px;
+             font: 70px "华文新魏", sans-serif;
+            border:3px solid #6666CC;
+            background: #CCCCFF;
+            color:#000000;
+        
+        }
+        .button:hover{                  /*光标选中提交按钮后效果*/
+            color: #333;
+            background-color: #6699CC;
+            border-color: #333399;
+        }
+        select {
+           font: 70px "华文新魏", sans-serif;
+            width: 1200px;
+            height: 120px;
+            padding: 15px 5px 10px 10px;
+            margin-bottom: 170px;
+            margin-right: 12px;
+            margin-top: 6px;
+            line-height: 5px;
+            border-radius: 5px;
+            border: 3px solid #333399;
+            color: #000000;
+            background-color:#CCCCFF;
+        }
+   </style>
+     
+</head>
+<body>
+       <div class="Content-Main">
+                <div class="titlee">
+                       <h1>学生卡/水卡充值</h1>
+                </div>
+
+               <hr style="height:2px;border:none;border-top:3px dashed #6666CC;width:1200px" />    
+
+    <form action="{% url 'czsow' %}" method="post" class="form-report">    
+	<br>{% csrf_token %}<br>
+      <label>                                                      <!-- 选择寝室楼-->
+            <span>充值类型</span>                                      
+               
+            <select name="select">
+             <option value="student">学生卡</option>
+             <option value="water">水卡</option>
+            </select>                                                   
+
+        </label>
+                                                                                                         
+        <label>                                    
+            <span>学号</span>                                                  <!-- 输入学号 -->
+            <input type="text" name="id" onkeyup="this.value=this.value.replace(/\D/g,'')"> 
+        </label>
+       
+        <label>                                    
+            <span>姓名</span>                                                     <!-- 显示姓名 -->
+            <input type="text" name="name" />   
+        </label>
+       
+        <label>                        
+            <span>充值金额</span>                                                     <!-- 输入充值金额 -->
+            <input type="text" name="money" maxlength="3" onkeyup="this.value=this.value.replace(/\D/g,'')">    
+        </label>
+       
+        <label>
+            <input type="submit" class="button" value="提交">   <!-- 提交按钮 -->
+        </label>
+		<label>
+			<input type="hidden", name="trade_no" value="{{order_num}}">
+		</label>
+
+    </form>
+</div>
+</body>
+</html>
+
